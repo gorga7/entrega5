@@ -40,7 +40,7 @@ nav a {
   margin-bottom: 0;
   background-color: #53C0FB;
   background: url('../img/cover_back.png');
-  background-size: cover;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
   color: black;
@@ -556,3 +556,12 @@ text-align: center;
 }
 
 
+/* responsive punto 4 */
+
+
+
+
+@media (max-width: 768px) {
+
+  
+}
