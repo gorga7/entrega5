@@ -71,7 +71,8 @@ async function nuevoDisplay() {let products = await fetchProducts();
 	let comentarios = await fetchComments();
     //Caracteristicas Productos
 	contenedor.innerHTML = `
-    <div id="nombre"> <h1>${products.name}</h1> </div>
+    <div id="nombre"> <h1>${products.name}</h1>
+    <input id="btnAgregarCarrito" type="button" value="Comprar" class="btn btn-primary btn-lg" class="float1"> </div>
     <hr>
     <ul class="estilo-lista">
         <li>
