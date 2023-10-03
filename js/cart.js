@@ -1,20 +1,22 @@
 
 const apiCarrito = "https://japceibal.github.io/emercado-api/user_cart/25801.json";
 
-let array_productos = {
-    imagen:`${localStorage.getItem("imagenCarrito")}`,
-    nombre: `${localStorage.getItem("nombreCarrito")}`,
-    costo: `${localStorage.getItem("costoCarrito")}`,
-    moneda: `${localStorage.getItem("monedaCarrito")}`,
-    imagen:`${localStorage.getItem("imagenCarrito")}`,
-    nombre: `${localStorage.getItem("nombreCarrito")}`,
-    costo: `${localStorage.getItem("costoCarrito")}`,
-    moneda: `${localStorage.getItem("monedaCarrito")}`,
-}
+// Obtener productos del carrito almacenados en localStorage
+let productosCarrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
-let productosCarrito = [];
+// Crear un nuevo producto
+let nuevoProducto = {
+    imagen: localStorage.getItem("imagenCarrito"),
+    nombre: localStorage.getItem("nombreCarrito"),
+    costo: localStorage.getItem("costoCarrito"),
+    moneda: localStorage.getItem("monedaCarrito"),
+};
 
-productosCarrito.push(array_productos);
+// Agregar el nuevo producto al array
+productosCarrito.push(nuevoProducto);
+
+// Guardar la lista actualizada en localStorage
+localStorage.setItem('carrito', JSON.stringify(productosCarrito));
 
 async function carritoFetch() {
     const res = await fetch(apiCarrito);
