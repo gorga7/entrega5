@@ -5,6 +5,8 @@
   font-family: 'Verdana', serif !important;
 }
 
+
+
 .jumbotron .display-4 {
   font-weight: bold;
 }
@@ -340,6 +342,12 @@ border-radius: 10px;
 #nombre{
   padding-left: 20px;
   margin-top: 20px;
+  
+}
+
+#btnComprar{
+
+  float: right;
 }
 
 .checked {
