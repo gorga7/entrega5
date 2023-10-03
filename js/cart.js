@@ -1,6 +1,21 @@
 
 const apiCarrito = "https://japceibal.github.io/emercado-api/user_cart/25801.json";
 
+let array_productos = {
+    imagen:`${localStorage.getItem("imagenCarrito")}`,
+    nombre: `${localStorage.getItem("nombreCarrito")}`,
+    costo: `${localStorage.getItem("costoCarrito")}`,
+    moneda: `${localStorage.getItem("monedaCarrito")}`,
+    imagen:`${localStorage.getItem("imagenCarrito")}`,
+    nombre: `${localStorage.getItem("nombreCarrito")}`,
+    costo: `${localStorage.getItem("costoCarrito")}`,
+    moneda: `${localStorage.getItem("monedaCarrito")}`,
+}
+
+let productosCarrito = [];
+
+productosCarrito.push(array_productos);
+
 async function carritoFetch() {
     const res = await fetch(apiCarrito);
     const data = await res.json();
@@ -13,10 +28,11 @@ async function mostrarCarrito() {
     const element = await carritoFetch();
     let contenedor = document.querySelector("main .container");
 
-    contenedor.innerHTML = `
+
+    contenedor.innerHTML += `
         <h1 class="h1Carrito">Carrito de Compras</h1>
         <h3>Artículos a comprar</h3>
-        <table class="tabla-carrito">
+        <table class="tabla-carrito" id="tabla-carrito">
             <tr class="titulos">
                 <th></th>
                 <th>Nombre</th>
@@ -35,6 +51,26 @@ async function mostrarCarrito() {
     `;
 
 
+    //ENTREGA 5 DESAFIATE
+
+    let cont_tabla = document.getElementById("tabla-carrito");
+
+
+    productosCarrito.forEach((producto) => {
+        let fila_tabla = document.createElement("tr");
+        fila_tabla.innerHTML = `
+            <td><img class="imagen-carrito" src="${producto.imagen}"/></td>
+            <td>${producto.nombre}</td>
+            <td>${producto.moneda} ${producto.costo}</td>
+            <td><input class="cantidadInput" type="number" placeholder="${element.articles[0].count}"></td>
+            <td class="total" class="negrita">${producto.moneda} ${producto.costo}</td>
+        `;
+        cont_tabla.appendChild(fila_tabla);
+    });
+
+    //FIN ENTREGA 5 DESAFIATE
+
+    
     //ENTREGA 5 PARTE 3
 
 

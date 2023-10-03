@@ -1,33 +1,31 @@
-let api_info = `https://japceibal.github.io/emercado-api/products/${
-	localStorage.getItem("prodID") + EXT_TYPE
-}`;
-let api_comments = `https://japceibal.github.io/emercado-api/products_comments/${
-	localStorage.getItem("prodID") + EXT_TYPE
-}`;
+let api_info = `https://japceibal.github.io/emercado-api/products/${localStorage.getItem("prodID") + EXT_TYPE
+    }`;
+let api_comments = `https://japceibal.github.io/emercado-api/products_comments/${localStorage.getItem("prodID") + EXT_TYPE
+    }`;
 
 console.log(api_info);
 console.log(api_comments);
 
 async function fetchProducts() {
     try {
-		let response = await fetch(api_info);
-		let data = await response.json();
-		return data;
-	} catch (error) {
-		console.error("Error fetching data:", error);
-		throw error; // Re-throw the error so it can be handled outside this function
-	}
+        let response = await fetch(api_info);
+        let data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        throw error; // Re-throw the error so it can be handled outside this function
+    }
 }
 
 async function fetchComments() {
     try {
-		let response = await fetch(api_comments);
-		let data = await response.json();
-		return data;
-	} catch (error) {
-		console.error("Error fetching data:", error);
-		throw error; // Re-throw the error so it can be handled outside this function
-	}
+        let response = await fetch(api_comments);
+        let data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        throw error; // Re-throw the error so it can be handled outside this function
+    }
 }
 
 function crearRatingEstrellas(puntaje) {
@@ -35,42 +33,43 @@ function crearRatingEstrellas(puntaje) {
     const ratingEstrellas = document.createElement("div");
 
     for (let i = 1; i <= maxEstrellas; i++) {
-      const estrella = document.createElement("span");
-      estrella.classList.add("fa", "fa-star");
-      if (puntaje >= i) {
-        estrella.classList.add("checked");
-      }
-      ratingEstrellas.appendChild(estrella);
+        const estrella = document.createElement("span");
+        estrella.classList.add("fa", "fa-star");
+        if (puntaje >= i) {
+            estrella.classList.add("checked");
+        }
+        ratingEstrellas.appendChild(estrella);
     }
 
     return ratingEstrellas;
 }
 //Comentarios (reubicados)
 function crearCardComentario(comentario) {
-	let puntaje = comentario.score;
-	let ratingEstrellas = crearRatingEstrellas(puntaje);
-	let card = document.createElement("div");
-	card.classList.add("estilo-comentarios");
+    let puntaje = comentario.score;
+    let ratingEstrellas = crearRatingEstrellas(puntaje);
+    let card = document.createElement("div");
+    card.classList.add("estilo-comentarios");
 
-	card.innerHTML = `
+    card.innerHTML = `
 	<p><strong>${comentario.user}</strong> -${comentario.dateTime} -<br>
 	${comentario.description}</p>
 	`;
 
-	card.appendChild(ratingEstrellas);
+    card.appendChild(ratingEstrellas);
 
-	return card;
+    return card;
 }
 
-function getContenedorDeComentarios() { 
+function getContenedorDeComentarios() {
     return document.getElementById("contenedor");
 }
 
-async function nuevoDisplay() {let products = await fetchProducts();
+async function nuevoDisplay() {
+    let products = await fetchProducts();
     let contenedor = getContenedorDeComentarios();
-	let comentarios = await fetchComments();
+    let comentarios = await fetchComments();
     //Caracteristicas Productos
-	contenedor.innerHTML = `
+    contenedor.innerHTML = `
 
 
     <div id="btnComprar"> <input type="button"  value="Comprar" id="btnAgregarCarrito" class="btn btn-primary btn-lg"></div>
@@ -142,12 +141,25 @@ async function nuevoDisplay() {let products = await fetchProducts();
     
 
     <h2>Comentarios</h2> `;
-	// comentarios
-	comentarios.forEach((comentario) => {
+    // comentarios
+    comentarios.forEach((comentario) => {
         const card = crearCardComentario(comentario);
-        
+
         contenedor.appendChild(card);
-	});
+    });
+
+    let btnAgregar = document.getElementById("btnAgregarCarrito");
+
+    // Entrega 5 --- DESAFIATE
+    btnAgregar.addEventListener("click", async function () {
+        let productoCarrito = await fetchProducts();
+
+        localStorage.setItem("imagenCarrito", `${productoCarrito.images[0]}`);
+        localStorage.setItem("nombreCarrito", `${productoCarrito.name}`);
+        localStorage.setItem("costoCarrito", `${productoCarrito.cost}`);
+        localStorage.setItem("monedaCarrito", `${productoCarrito.currency}`);
+    })
+
 }
 
 let boton = document.getElementById("btnEnviar");
@@ -156,7 +168,7 @@ boton.addEventListener("click", function () {
     const fecha = new Date();
     const now = fecha.toLocaleString();
 
-    const  comentarioNuevo = {
+    const comentarioNuevo = {
         user: localStorage.getItem("email"),
         description: document.getElementById("areaDeTexto").value,
         score: document.getElementById("estrellas-enviadas").value,
@@ -168,26 +180,26 @@ boton.addEventListener("click", function () {
     contenedor.appendChild(cardComentario)
 });
 
- // Call nuevoDisplay to fetch and display products
- nuevoDisplay();
+// Call nuevoDisplay to fetch and display products
+nuevoDisplay();
 
 
 // funcion que guarda el id
- function prodID(id) {
+function prodID(id) {
     localStorage.setItem("prodID", id);
     window.location = "product-info.html"
 }
 
- 
+
 
 // Función para mostrar productos en la página
 async function mostrarProductosrelacionados() {
     let products = await fetchProducts()
     const productosContainer = document.getElementById("productos-container");
 
-    products.relatedProducts.forEach(element=>{
-        productosContainer.innerHTML+=
-        `
+    products.relatedProducts.forEach(element => {
+        productosContainer.innerHTML +=
+            `
         
         
         <ul class="producto"class="productoReferencia" onclick="prodID(${element.id})">
@@ -205,14 +217,12 @@ async function mostrarProductosrelacionados() {
 
     })
 
-   
+
 
 }
 
 // Llamar a la función para mostrar productos cuando la página cargue
 window.onload = mostrarProductosrelacionados;
-
-
 
 
 
