@@ -44,10 +44,10 @@ async function mostrarCarrito() {
 
     cantidadInput.addEventListener("input", calcularTotal);
 
-    function calcularTotal() {
-
+   async function calcularTotal() {
+        const element = await carritoFetch();
         var cantidad = cantidadInput.value;        
-        var precioUnitario = 15200;      
+        var precioUnitario = element.articles[0].unitCost;      
         var total = cantidad * precioUnitario;
 
         totalTd.textContent = "$" + total.toFixed(2);

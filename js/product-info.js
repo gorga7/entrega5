@@ -73,7 +73,7 @@ async function nuevoDisplay() {let products = await fetchProducts();
 	contenedor.innerHTML = `
 
 
-    <div id="btnComprar"> <input type="button" value="Comprar" id="btnAgregarCarrito" class="btn btn-primary btn-lg"></div>
+    <div id="btnComprar"> <input type="button"  value="Comprar" id="btnAgregarCarrito" class="btn btn-primary btn-lg"></div>
 
 
     <div id="nombre"> <h1>${products.name}</h1>
