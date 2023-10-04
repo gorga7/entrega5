@@ -64,8 +64,8 @@ async function mostrarCarrito() {
             <td><img class="imagen-carrito" src="${producto.imagen}"/></td>
             <td>${producto.nombre}</td>
             <td>${producto.moneda} ${producto.costo}</td>
-            <td><input class="cantidadInput" type="number" placeholder="${element.articles[0].count}"></td>
-            <td class="total" class="negrita">${producto.moneda} ${producto.costo}</td>
+            <td><input id="cantidadInput" type="number" placeholder="${element.articles[0].count}"></td>
+            <td id="total" class="negrita">${producto.moneda} ${producto.costo}</td>
         `;
         cont_tabla.appendChild(fila_tabla);
     });
