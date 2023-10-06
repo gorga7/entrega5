@@ -25,24 +25,7 @@ async function fetchProducts() {
 async function displayProducts() {
   let products = await fetchProducts();
 
-  products.forEach((product) => {
-    let card = document.createElement("div");
-    card.classList.add("div-cards");
-    card.innerHTML = `
-              <img src="${product.image}" alt="${product.name}">
-              <div>
-                  <h2>${product.name} - ${product.currency} ${product.cost}</h2>
-                  <p>${product.description}</p>
-              </div>
-              <span class="price">${product.soldCount} vendidos</span>
-          `;
-    cardsContainer.appendChild(card);
-
-    card.addEventListener("click", function(e){
-      e.preventDefault();
-      setProdID(product.id);
-    })
-  });
+  products.forEach((product) => printProducto(product, cardsContainer) );
 }
 // Llamo a la func para mostrar los productos cuando la página cargue
 displayProducts();
@@ -59,6 +42,29 @@ document.getElementById("flecha_Descendente").addEventListener("click", function
 document.getElementById("flecha_Relevancia").addEventListener("click", function () {
   ordenarProductos('relevante');
 });
+
+
+/**
+ * Imprime un producto en el contenedor especificado
+ */
+function printProducto(product, container) {
+    let card = document.createElement("div");
+    card.classList.add("div-cards", "row", "container");
+    card.innerHTML = `
+              <img class="col-sm-12 col-md-12 img-fluid" src="${product.image}" alt="${product.name}">
+              <div class="col-sm-12 col-md-12">
+                  <h2>${product.name} - ${product.currency} ${product.cost}</h2>
+                  <p>${product.description}</p>
+              </div>
+              <span class="price col-sm-12 col-md-12">${product.soldCount} vendidos</span>
+          `;
+    container.appendChild(card);
+
+    card.addEventListener("click", function (e) {
+      e.preventDefault();
+      setProdID(product.id);
+    });
+}
 
 async function ordenarProductos(x) {
   let products = await fetchProducts();
@@ -85,24 +91,7 @@ async function ordenarProductos(x) {
 
   
   // Muestra los productos ordenados
-  products.forEach((product) => {
-    let card = document.createElement("div");
-    card.classList.add("div-cards");
-    card.innerHTML = `
-              <img src="${product.image}" alt="${product.name}">
-              <div>
-                  <h2>${product.name} - ${product.currency} ${product.cost}</h2>
-                  <p>${product.description}</p>
-              </div>
-              <span class="price">${product.soldCount} vendidos</span>
-          `;
-    cardsContainer.appendChild(card);
-
-    card.addEventListener("click", function(e){
-      e.preventDefault();
-      setProdID(product.id);
-    })
-  });
+  products.forEach((producto) => printProducto(producto, cardsContainer));
 }
 
 //Funciona el boton de limpiar en products.html(rocio)
@@ -138,24 +127,7 @@ async function displayProducts(filterTerm = "") {
   }
 
   // Mostrar los productos filtrados
-  products.forEach((product) => {
-    let card = document.createElement("div");
-    card.classList.add("div-cards");
-    card.innerHTML = `
-              <img src="${product.image}" alt="${product.name}">
-              <div>
-                  <h2>${product.name} - ${product.currency} ${product.cost}</h2>
-                  <p>${product.description}</p>
-              </div>
-              <span class="price">${product.soldCount} vendidos</span>
-          `;
-    cardsContainer.appendChild(card);
-
-    card.addEventListener("click", function(e){
-      e.preventDefault();
-      setProdID(product.id);
-    })
-  });
+  products.forEach((producto) => printProducto(producto, cardsContainer));
 };
 
 async function filtrarProductos() {
@@ -175,24 +147,7 @@ async function filtrarProductos() {
   }
 
   // Mostrar los productos filtrados
-  filteredProducts.forEach((product) => {
-    let card = document.createElement("div");
-    card.classList.add("div-cards");
-    card.innerHTML = `
-              <img src="${product.image}" alt="${product.name}">
-              <div>
-                  <h2>${product.name} - ${product.currency} ${product.cost}</h2>
-                  <p>${product.description}</p>
-              </div>
-              <span class="price">${product.soldCount} vendidos</span>
-          `;
-    cardsContainer.appendChild(card);
-
-    card.addEventListener("click", function(e){
-      e.preventDefault();
-      setProdID(product.id);
-    })
-  });
+  filteredProducts.forEach((producto) => printProducto(producto, cardsContainer));
 }
 
 // Agregar un evento click al botón o elemento con el ID "rangeFilterCount"
