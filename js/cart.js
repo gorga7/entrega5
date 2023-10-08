@@ -33,7 +33,8 @@ async function mostrarCarrito() {
 
 
     contenedor.innerHTML += `
-        <h1 class="h1Carrito">Carrito de Compras</h1>
+        <h2 class="h1Carrito">Carrito de Compras</h2>
+        <br>
         <h3>Artículos a comprar</h3>
         <br>
         <table class="tabla-carrito" id="tabla-carrito">
