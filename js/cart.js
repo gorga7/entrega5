@@ -16,7 +16,8 @@ let nuevoProducto = {
 productosCarrito.push(nuevoProducto);
 
 // Guardar la lista actualizada en localStorage
-localStorage.setItem('carrito', JSON.stringify(productosCarrito));
+//Es lo que ocasiona el bucle! 
+//localStorage.setItem('carrito', JSON.stringify(productosCarrito));
 
 async function carritoFetch() {
     const res = await fetch(apiCarrito);
@@ -34,19 +35,22 @@ async function mostrarCarrito() {
     contenedor.innerHTML += `
         <h1 class="h1Carrito">Carrito de Compras</h1>
         <h3>Artículos a comprar</h3>
+        <br>
         <table class="tabla-carrito" id="tabla-carrito">
             <tr class="titulos">
+            
                 <th></th>
                 <th>Nombre</th>
                 <th>Costo</th>
                 <th>Cantidad</th>
                 <th>Subtotal</th>
             </tr>
+            <br>
             <tr>
                 <td><img class="imagen-carrito" src="${element.articles[0].image}"/></td>
                 <td>${element.articles[0].name}</td>
                 <td>${element.articles[0].currency} ${element.articles[0].unitCost}</td>
-                <td><input id="cantidadInput" type="number" placeholder="${element.articles[0].count}"></td>
+                <td><input id="cantidadInput" type="number" name="${element.articles[0].unitCost}"></td>
                 <td id="total" class="negrita">${element.articles[0].currency} ${element.articles[0].unitCost}</td>
             </tr>
         </table>
@@ -64,7 +68,7 @@ async function mostrarCarrito() {
             <td><img class="imagen-carrito" src="${producto.imagen}"/></td>
             <td>${producto.nombre}</td>
             <td>${producto.moneda} ${producto.costo}</td>
-            <td><input id="cantidadInput" type="number" placeholder="${element.articles[0].count}"></td>
+            <td><input id="cantidadInput" type="number" name="${element.articles[0].unitCost}"></td>
             <td id="total" class="negrita">${producto.moneda} ${producto.costo}</td>
         `;
         cont_tabla.appendChild(fila_tabla);
