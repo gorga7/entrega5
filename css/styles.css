@@ -558,3 +558,7 @@ text-align: center;
 
   
 }
+.div-cards img {
+  max-width: 210px;
+  margin-right: 20px;
+}
