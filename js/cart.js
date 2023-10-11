@@ -90,16 +90,29 @@ async function mostrarCarrito() {
             <td><img class="imagen-carrito" src="${producto.imagen}"/></td>
             <td>${producto.nombre}</td>
             <td>${producto.moneda} ${producto.costo}</td>
-            <td><input id="cantidadInputNuevo" type="number" value="${producto.cantidad}" name="${element.articles[0].unitCost}"></td>
-            <td id="totalCarrito" class="negrita">${producto.moneda} ${producto.costo}</td>
+            <td><input class="cantidadInputNuevo" type="number" value="${producto.cantidad}" name="${producto.nombre}"></td>
+            <td class="negrita">${producto.moneda} <span class="costoProducto">${producto.cantidad * producto.costo}</span></td>
+
         `
         ;
         cont_tabla.appendChild(fila_tabla);
-        let inputNuevo = document.getElementById("cantidadInputNuevo");
-        let costoInput = producto.costo;
-        inputNuevo.addEventListener("input", function(){
-            calcularTotal2 (costoInput);
-        })
+       
+        
+
+    // Agregar un evento para cada input
+    const cantidadInputNuevo = document.querySelectorAll(".cantidadInputNuevo");
+    const costoProducto = document.querySelectorAll(".costoProducto");
+    
+    cantidadInputNuevo.forEach((input, index) => {
+        input.addEventListener("input", () => {
+            const cantidad = parseInt(input.value);
+            const costo = parseInt(productosCarrito[index].costo);
+            const subtotal = cantidad * costo;
+            costoProducto[index].textContent = ` ${subtotal.toFixed(2)}`;
+        });
+    });
+
+
     });
     
     
@@ -127,29 +140,6 @@ async function mostrarCarrito() {
     }
 
 
-// Obtén los elementos de cantidad y subtotal del carrito
-let cantidadInputNuevo = document.getElementById("cantidadInputNuevo");
-let subtotalCarrito = document.getElementById("totalCarrito");
 
-// Agrega un evento de escucha para la entrada de cantidad
-cantidadInputNuevo.addEventListener("input", calcularTotal2);
-
-function calcularTotal2(x) {
-    console.log(x);
-    let totalCarritoDalee = document.getElementById('totalCarrito');
-    // Obtén la cantidad ingresada por el usuario
-    var cantidad = cantidadInputNuevo.value;
-
-    // Obtén el precio unitario del producto (ajústalo según tus datos reales)
-    var precioUnitario = x;
-
-    // Calcula el nuevo subtotal
-    total += cantidad * precioUnitario;
-
-    console.log(total);
-
-    // Actualiza el contenido del elemento que muestra el subtotal
-    totalCarritoDalee.innerText = "$" + total.toFixed(2);
-}
 
 }
