@@ -88,8 +88,8 @@ async function mostrarCarrito() {
             <td><img class="imagen-carrito" src="${producto.imagen}"/></td>
             <td>${producto.nombre}</td>
             <td>${producto.moneda} ${producto.costo}</td>
-            <td><input id="cantidadInput" type="number" value="${producto.cantidad}" name="${element.articles[0].unitCost}"></td>
-            <td id="total" class="negrita">${producto.moneda} ${producto.costo}</td>
+            <td><input id="cantidadInputNuevo" type="number" value="${producto.cantidad}" name="${element.articles[0].unitCost}"></td>
+            <td id="totalCarrito" class="negrita">${producto.moneda} ${producto.costo}</td>
         `;
         cont_tabla.appendChild(fila_tabla);
     });
@@ -105,6 +105,8 @@ async function mostrarCarrito() {
     var totalTd = document.getElementById("total");
 
     cantidadInput.addEventListener("input", calcularTotal);
+    
+/*
 
    async function calcularTotal() {
         const element = await carritoFetch();
@@ -114,4 +116,26 @@ async function mostrarCarrito() {
 
         totalTd.textContent = "$" + total.toFixed(2);
     }
+*/
+
+     
+let cantidadCarrito = document.getElementById("cantidadInputNuevo");
+let subtotalCarrito = document.getElementById("totalCarrito");
+
+cantidadCarrito.addEventListener("input", calcularTotal);
+
+
+async function calcularTotal2() {
+    var cantidad = cantidadCarrito.value; 
+    
+    
+    var precioUnitario = 8000;
+
+
+    var total = cantidad * precioUnitario;
+
+    subtotalCarrito.textContent = "$" + total.toFixed(2);
 }
+
+}
+
