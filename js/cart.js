@@ -106,7 +106,7 @@ async function mostrarCarrito() {
 
     cantidadInput.addEventListener("input", calcularTotal);
     
-/*
+
 
    async function calcularTotal() {
         const element = await carritoFetch();
@@ -116,13 +116,13 @@ async function mostrarCarrito() {
 
         totalTd.textContent = "$" + total.toFixed(2);
     }
-*/
 
-     
+
+     /*
 let cantidadCarrito = document.getElementById("cantidadInputNuevo");
 let subtotalCarrito = document.getElementById("totalCarrito");
 
-cantidadCarrito.addEventListener("input", calcularTotal);
+cantidadCarrito.addEventListener("input", calcularTotal2);
 
 
 async function calcularTotal2() {
@@ -136,6 +136,30 @@ async function calcularTotal2() {
 
     subtotalCarrito.textContent = "$" + total.toFixed(2);
 }
+*/
+
+
+// Obtén los elementos de cantidad y subtotal del carrito
+let cantidadInputNuevo = document.getElementById("cantidadInputNuevo");
+let subtotalCarrito = document.getElementById("totalCarrito");
+
+// Agrega un evento de escucha para la entrada de cantidad
+cantidadInputNuevo.addEventListener("input", calcularTotal2);
+
+async function calcularTotal2() {
+    // Obtén la cantidad ingresada por el usuario
+    var cantidad = cantidadInputNuevo.value;
+
+    // Obtén el precio unitario del producto (ajústalo según tus datos reales)
+    var precioUnitario = 8000; 
+
+    // Calcula el nuevo subtotal
+    var total = cantidad * precioUnitario;
+
+    // Actualiza el contenido del elemento que muestra el subtotal
+    subtotalCarrito.textContent = "$" + total.toFixed(2);
+}
+
 
 }
 
