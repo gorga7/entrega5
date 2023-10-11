@@ -149,9 +149,11 @@ async function nuevoDisplay() {
     });
 
     let btnAgregar = document.getElementById("btnAgregarCarrito");
-
     // Entrega 5 --- DESAFIATE
     btnAgregar.addEventListener("click", async function () {
+
+     window.location.reload();
+
         let productoCarrito = await fetchProducts();
 
         localStorage.setItem("imagenCarrito", `${productoCarrito.images[0]}`);
@@ -162,6 +164,7 @@ async function nuevoDisplay() {
 
 
     carritoLocal();
+    
 }
 
 let boton = document.getElementById("btnEnviar");
