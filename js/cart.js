@@ -151,7 +151,7 @@ async function calcularTotal2() {
     var cantidad = cantidadInputNuevo.value;
 
     // Obtén el precio unitario del producto (ajústalo según tus datos reales)
-    var precioUnitario = 8000; 
+    var precioUnitario = products.cost; 
 
     // Calcula el nuevo subtotal
     var total = cantidad * precioUnitario;
