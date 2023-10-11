@@ -4,26 +4,45 @@ const apiCarrito = "https://japceibal.github.io/emercado-api/user_cart/25801.jso
 // Obtener productos del carrito almacenados en localStorage
 let productosCarrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
-// Crear un nuevo producto
-let nuevoProducto = {
-    imagen: localStorage.getItem("imagenCarrito"),
-    nombre: localStorage.getItem("nombreCarrito"),
-    costo: localStorage.getItem("costoCarrito"),
-    moneda: localStorage.getItem("monedaCarrito"),
-};
+function carritoLocal() {
+    // Crear un nuevo producto
+    let nuevoProducto = {
+        id: localStorage.getItem("prodID"),
+        imagen: localStorage.getItem("imagenCarrito"),
+        nombre: localStorage.getItem("nombreCarrito"),
+        costo: localStorage.getItem("costoCarrito"),
+        moneda: localStorage.getItem("monedaCarrito"),
+    };
 
-// Agregar el nuevo producto al array
-productosCarrito.push(nuevoProducto);
+    // Verificar si el producto ya existe en el carrito
+    let productoExistente = productosCarrito.find(item => item.nombre === nuevoProducto.nombre);
 
-// Guardar la lista actualizada en localStorage
-//Es lo que ocasiona el bucle! 
-//localStorage.setItem('carrito', JSON.stringify(productosCarrito));
+    if (productoExistente) {
+        // Si el producto existe, incrementar la cantidad en el objeto existente
+        productoExistente.cantidad++;
+    } else {
+        // Agregar el nuevo producto al array
+        nuevoProducto.cantidad = 1; // Establecer la cantidad en 1 para un nuevo producto
+        productosCarrito.push(nuevoProducto);
+    }
+
+    // Actualizar el carrito en el almacenamiento local
+    localStorage.setItem('carrito', JSON.stringify(productosCarrito));
+}
+
+
+
+
+
 
 async function carritoFetch() {
     const res = await fetch(apiCarrito);
     const data = await res.json();
     return data;
 }
+
+
+
 
 mostrarCarrito();
 
@@ -51,7 +70,7 @@ async function mostrarCarrito() {
                 <td><img class="imagen-carrito" src="${element.articles[0].image}"/></td>
                 <td>${element.articles[0].name}</td>
                 <td>${element.articles[0].currency} ${element.articles[0].unitCost}</td>
-                <td><input id="cantidadInput" type="number" name="${element.articles[0].unitCost}"></td>
+                <td><input id="cantidadInput" type="number"  name="${element.articles[0].unitCost}"></td>
                 <td id="total" class="negrita">${element.articles[0].currency} ${element.articles[0].unitCost}</td>
             </tr>
         </table>
@@ -69,7 +88,7 @@ async function mostrarCarrito() {
             <td><img class="imagen-carrito" src="${producto.imagen}"/></td>
             <td>${producto.nombre}</td>
             <td>${producto.moneda} ${producto.costo}</td>
-            <td><input id="cantidadInput" type="number" name="${element.articles[0].unitCost}"></td>
+            <td><input id="cantidadInput" type="number" value="${producto.cantidad}" name="${element.articles[0].unitCost}"></td>
             <td id="total" class="negrita">${producto.moneda} ${producto.costo}</td>
         `;
         cont_tabla.appendChild(fila_tabla);

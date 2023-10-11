@@ -160,6 +160,8 @@ async function nuevoDisplay() {
         localStorage.setItem("monedaCarrito", `${productoCarrito.currency}`);
     })
 
+
+    carritoLocal();
 }
 
 let boton = document.getElementById("btnEnviar");
@@ -224,5 +226,46 @@ async function mostrarProductosrelacionados() {
 // Llamar a la función para mostrar productos cuando la página cargue
 window.onload = mostrarProductosrelacionados;
 
+
+
+
+
+
+// entrega 5 carrito
+
+
+
+// Obtener productos del carrito almacenados en localStorage
+let productosCarrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+function carritoLocal() {
+    // Crear un nuevo producto
+    let nuevoProducto = {
+        id: localStorage.getItem("prodID"),
+        imagen: localStorage.getItem("imagenCarrito"),
+        nombre: localStorage.getItem("nombreCarrito"),
+        costo: localStorage.getItem("costoCarrito"),
+        moneda: localStorage.getItem("monedaCarrito"),
+    };
+
+    // Verificar si el producto ya existe en el carrito
+    let productoExistente = productosCarrito.find(item => item.nombre === nuevoProducto.nombre);
+
+    if (productoExistente) {
+        
+
+            productoExistente.cantidad++;
+
+       
+            
+    } else {
+        // Agregar el nuevo producto al array
+        nuevoProducto.cantidad = 1; // Establecer la cantidad en 1 para un nuevo producto
+        productosCarrito.push(nuevoProducto);
+    }
+
+    // Actualizar el carrito en el almacenamiento local
+    localStorage.setItem('carrito', JSON.stringify(productosCarrito));
+}
 
 
