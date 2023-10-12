@@ -602,3 +602,12 @@ h6 {
 .colorindex {
 background: linear-gradient(#fbf9f7, rgb(105, 105, 105));
 }
+
+.row{
+  cursor:pointer;
+  
+}
+
+.list-group .col:hover {
+  background-color: #ced4da;
+}
