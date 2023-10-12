@@ -98,15 +98,13 @@ async function mostrarCarrito() {
         if(producto.nombre != null){
 
 
-        fila_tabla.innerHTML = `
-            <td><img class="imagen-carrito" src="${producto.imagen}"/></td>
-            <td>${producto.nombre}</td>
-            <td>${producto.moneda} ${producto.costo}</td>
-            <td><input class="cantidadInputNuevo" type="number" value="${producto.cantidad}" name="${producto.nombre}"></td>
-            <td class="negrita">${producto.moneda} <span class="costoProducto">${producto.cantidad * producto.costo}</span></td>
-
-        `
-        ;
+       fila_tabla.innerHTML = `
+    <td><img class="imagen-carrito" src="${producto.imagen}"/></td>
+    <td>${producto.nombre}</td>
+    <td>${producto.moneda} ${producto.costo}</td>
+    <td><input class="cantidadInputNuevo" type="number" value="${producto.cantidad}" id="cantidad_${producto.nombre}"></td>
+    <td id="subTotal" class="negrita">${producto.moneda} <span class="costoProducto">${producto.cantidad * producto.costo}</span></td>
+`;
         cont_tabla.appendChild(fila_tabla);
 
         
@@ -123,12 +121,19 @@ async function mostrarCarrito() {
     
     cantidadInputNuevo.forEach((input, index) => {
         input.addEventListener("input", () => {
-            const cantidad = parseInt(input.value);
-            const costo = parseInt(productosCarrito[index].costo);
-            const subtotal = cantidad * costo;
-            costoProducto[index].textContent = ` ${subtotal.toFixed(2)}`;
-
-            console.log(cantidad);
+            const cantidadInputID = input.getAttribute("id");
+            const productoNombre = cantidadInputID.split("_")[1];
+            const cantidad = parseFloat(input.value);
+            const producto = productosCarrito.find(item => item.nombre === productoNombre);
+    
+            if (!isNaN(cantidad) && producto) {
+                const costo = parseFloat(producto.costo);
+                const subtotal = cantidad * costo;
+                costoProducto[index].textContent = `${producto.moneda} ${subtotal.toFixed(2)}`;
+            } else {
+                // Maneja el caso donde la cantidad no es un número válido
+                costoProducto[index].textContent = `${producto.moneda} 0.00`;
+            }
         });
     });
 
