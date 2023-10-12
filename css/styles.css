@@ -35,7 +35,7 @@ nav a {
 
 
 .jumbotron {
-  height: 20vh;/*cambio para pag principal*/
+  height: 50vh;/*cambio para pag principal*/
   padding: 5em inherit;
   margin-bottom: 0;
   background-color: #53C0FB;
@@ -45,6 +45,7 @@ nav a {
   background-repeat: no-repeat;
   color: black;
   font-weight: bold;
+  
 }
 
 @media (min-width: 768px) {
@@ -352,6 +353,7 @@ border-bottom: 25px;
   float: right;
   background-color:salmon;
   border-color: salmon;
+  max-width: 120px;
 }
 
 .checked {
@@ -427,9 +429,9 @@ body.dark-theme div {
 }
 
 h2 {
-  text-align: center;
+  text-align:start;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  text-decoration-color: aqua;
+padding: 20px;
   display: flex;
   position: relative;
 }
@@ -485,6 +487,8 @@ h2 {
 #botonmas {
   color: rgb(255, 255, 255);
   text-shadow: #333;
+  width: 700px;
+  margin-left: 11px;
 }
 
 #carouselExample {
@@ -573,11 +577,11 @@ h6 {
 .imagen-carrito {
   width: 125px;
   margin: 5px;
+  
 }
 
-
 .h1Carrito {
-  text-align: center;
+  text-align: center ;
   margin-left: 50px;
   max-width: 210px;
 }
@@ -605,7 +609,7 @@ background: linear-gradient(#fbf9f7, rgb(105, 105, 105));
 
 .row{
   cursor:pointer;
-  
+ 
 }
 
 .list-group .col:hover {
