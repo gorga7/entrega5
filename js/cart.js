@@ -3,11 +3,11 @@ const apiCarrito = "https://japceibal.github.io/emercado-api/user_cart/25801.jso
 let total = 0;
 
 
-// Obtener productos del carrito almacenados en localStorage
+
 let productosCarrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
 function carritoLocal() {
-    // Crear un nuevo producto
+    
     let nuevoProducto = {
         id: localStorage.getItem("prodID"),
         imagen: localStorage.getItem("imagenCarrito"),
@@ -16,19 +16,19 @@ function carritoLocal() {
         moneda: localStorage.getItem("monedaCarrito"),
     };
 
-    // Verificar si el producto ya existe en el carrito
+   
     let productoExistente = productosCarrito.find(item => item.nombre === nuevoProducto.nombre);
 
     if (productoExistente) {
-        // Si el producto existe, incrementar la cantidad en el objeto existente
+      
         productoExistente.cantidad++;
     } else {
-        // Agregar el nuevo producto al array
-        nuevoProducto.cantidad = 1; // Establecer la cantidad en 1 para un nuevo producto
+        
+        nuevoProducto.cantidad = 1; 
         productosCarrito.push(nuevoProducto);
     }
 
-    // Actualizar el carrito en el almacenamiento local
+    
     localStorage.setItem('carrito', JSON.stringify(productosCarrito));
 }
 
@@ -115,7 +115,7 @@ async function mostrarCarrito() {
        
         }
 
-           // Agregar un evento para cada input
+          
     const cantidadInputNuevo = document.querySelectorAll(".cantidadInputNuevo");
     const costoProducto = document.querySelectorAll(".costoProducto");
     
@@ -131,7 +131,7 @@ async function mostrarCarrito() {
                 const subtotal = cantidad * costo;
                 costoProducto[index].textContent = `${producto.moneda} ${subtotal.toFixed(2)}`;
             } else {
-                // Maneja el caso donde la cantidad no es un número válido
+             
                 costoProducto[index].textContent = `${producto.moneda} 0.00`;
             }
         });
@@ -170,6 +170,9 @@ async function mostrarCarrito() {
 
 }
 
+
+
+
 const btnTema = document.getElementById('btnTema');
 const body = document.body;
 
@@ -177,10 +180,10 @@ const body = document.body;
 function toggleTheme() {
     if (body.classList.contains('dark-theme')) {
         body.classList.remove('dark-theme');
-        localStorage.setItem('theme', 'light'); // Guardar el tema en el almacenamiento local
+        localStorage.setItem('theme', 'light'); 
     } else {
         body.classList.add('dark-theme');
-        localStorage.setItem('theme', 'dark'); // Guardar el tema en el almacenamiento local
+        localStorage.setItem('theme', 'dark');
     }
 }
 
@@ -197,13 +200,6 @@ if (currentTheme === 'dark') {
 btnTema.addEventListener('click', toggleTheme);
 
 
-
 let email = localStorage.getItem("email"); // <- email = "emilianopintos18@gmail.com"
-
-
-
-
 let li_nav = document.getElementById("usuario");
-
-
 li_nav.innerHTML = `<span class="nav-link">${email}</span>`;
