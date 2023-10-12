@@ -142,6 +142,7 @@ document.addEventListener("DOMContentLoaded", function(e){
     });
 });
 
+let email = localStorage.getItem("email");
 let li_nav = document.getElementById("usuario");
 
 
