@@ -73,10 +73,11 @@ async function mostrarCarrito() {
                 <td>${element.articles[0].name}</td>
                 <td>${element.articles[0].currency} ${element.articles[0].unitCost}</td>
                 <td><input id="cantidadInput" type="number"  name="${element.articles[0].unitCost}"></td>
-                <td id="total" class="negrita">${element.articles[0].currency} ${element.articles[0].unitCost}</td>
+                <td id="total" class="negrita">${element.articles[0].currency} ${element.articles[0].unitCost}</td> 
             </tr>
         </table>
     `;
+    console.log(element)
 
 
     //ENTREGA 5 DESAFIATE
@@ -129,7 +130,7 @@ async function mostrarCarrito() {
             if (!isNaN(cantidad) && producto) {
                 const costo = parseFloat(producto.costo);
                 const subtotal = cantidad * costo;
-                costoProducto[index].textContent = `${producto.moneda} ${subtotal.toFixed(2)}`;
+                costoProducto[index].textContent = ` ${subtotal}`;
             } else {
              
                 costoProducto[index].textContent = `${producto.moneda} 0.00`;
@@ -161,8 +162,9 @@ async function mostrarCarrito() {
         var cantidad = cantidadInput.value;        
         var precioUnitario = element.articles[0].unitCost;      
         var total = cantidad * precioUnitario;
+        var tipoMoneda = element.articles[0].currency
 
-        totalTd.textContent = "$" + total.toFixed(2);
+        totalTd.textContent = tipoMoneda + " " + total;
     }
 
 

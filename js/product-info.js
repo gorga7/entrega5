@@ -156,6 +156,7 @@ async function nuevoDisplay() {
 
         let productoCarrito = await fetchProducts();
 
+alert('Tu producto se agregó correctamente al carrito de compras')
         localStorage.setItem("imagenCarrito", `${productoCarrito.images[0]}`);
         localStorage.setItem("nombreCarrito", `${productoCarrito.name}`);
         localStorage.setItem("costoCarrito", `${productoCarrito.cost}`);
@@ -164,6 +165,8 @@ async function nuevoDisplay() {
 
 
     carritoLocal();
+
+    
    
 }
 
