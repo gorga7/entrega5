@@ -164,7 +164,7 @@ async function nuevoDisplay() {
 
 
     carritoLocal();
-    
+   
 }
 
 let boton = document.getElementById("btnEnviar");

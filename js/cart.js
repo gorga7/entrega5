@@ -84,8 +84,20 @@ async function mostrarCarrito() {
     let cont_tabla = document.getElementById("tabla-carrito");
 
 
+
+    
+
+
     productosCarrito.forEach((producto) => {
+
+
+        
+
+        
         let fila_tabla = document.createElement("tr");
+        if(producto.nombre != null){
+
+
         fila_tabla.innerHTML = `
             <td><img class="imagen-carrito" src="${producto.imagen}"/></td>
             <td>${producto.nombre}</td>
@@ -96,10 +108,16 @@ async function mostrarCarrito() {
         `
         ;
         cont_tabla.appendChild(fila_tabla);
-       
-        
 
-    // Agregar un evento para cada input
+        
+        localStorage.removeItem('nombreCarrito'); 
+        localStorage.setItem('costoCarrito', producto.costo); 
+       
+
+       
+        }
+
+           // Agregar un evento para cada input
     const cantidadInputNuevo = document.querySelectorAll(".cantidadInputNuevo");
     const costoProducto = document.querySelectorAll(".costoProducto");
     
@@ -109,8 +127,11 @@ async function mostrarCarrito() {
             const costo = parseInt(productosCarrito[index].costo);
             const subtotal = cantidad * costo;
             costoProducto[index].textContent = ` ${subtotal.toFixed(2)}`;
+
+            console.log(cantidad);
         });
     });
+
 
 
     });
