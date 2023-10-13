@@ -581,9 +581,10 @@ h6 {
 }
 
 .h1Carrito {
-  text-align: center ;
-  margin-left: 50px;
-  max-width: 210px;
+  
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px solid black;
 }
 
 .negrita {
